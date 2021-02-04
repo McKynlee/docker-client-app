@@ -3,22 +3,22 @@ Site - ensures that the footer is fixed to the bottom of the
 web page
 ------------------------------------------------------------ */
 #root {
-    height: 100%;
+  height: 100%;
 }
 
 .site {
-	display: flex;
-	height: 100%; /* needed for IE10 */
-	min-height: 100%;
-	flex-direction: column;
+  display: flex;
+  height: 100%; /* needed for IE10 */
+  min-height: 100%;
+  flex-direction: column;
 }
 
 .site-hd {
-	flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .site-bd {
-	flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 /* ------------------------------------------------------------
@@ -26,10 +26,10 @@ Page Container
 ------------------------------------------------------------ */
 
 .pgContainer {
-    max-width: 1000px;
-    padding: 20px;
-    margin: auto;
-    box-sizing: border-box;
+  max-width: 1000px;
+  padding: 20px;
+  margin: auto;
+  box-sizing: border-box;
 }
 
 /* ------------------------------------------------------------
@@ -37,20 +37,20 @@ Page Title
 ------------------------------------------------------------ */
 
 .pageTitle {
-    width: 100%;
-    padding: 0 0 10px;
-    margin: 0 0 40px;
-    position: relative;
+  width: 100%;
+  padding: 0 0 10px;
+  margin: 0 0 40px;
+  position: relative;
 }
 
 .pageTitle:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: darkgrey;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: darkgrey;
 }
 
 /* ------------------------------------------------------------
@@ -58,23 +58,23 @@ Vertical Rhythm
 ------------------------------------------------------------ */
 
 .vr {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .vr_x2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .vr_x3 {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .vr_x4 {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .vr_x5 {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 /* ------------------------------------------------------------
@@ -82,33 +82,33 @@ Docker Panel
 ------------------------------------------------------------ */
 
 .dockerPanel {
-    padding: 10px 10px 15px;
-    margin: 0;
-    box-sizing: border-box;
-    border-radius: 6px;
-    background: #254356 none;
-    color: #ffffff;
-    text-align: center;
-    font-size: 1.2rem;
+  padding: 10px 10px 15px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: #254356 none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .dockerPanel_outlined {
-    background-color: #ffffff;
-    border: 2px solid #254356;
-    color: #254356;
+  background-color: #ffffff;
+  border: 2px solid #254356;
+  color: #254356;
 }
 
 .dockerPanel .dockerPanel {
-    background-color: #506877;
-    border-radius: 3px;
+  background-color: #506877;
+  border-radius: 3px;
 }
 
 .dockerPanel > * + * {
-    margin-top: 6px;
+  margin-top: 6px;
 }
 
 .dockerPanel-label {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 /* ------------------------------------------------------------
@@ -116,25 +116,25 @@ Docker Shell
 ------------------------------------------------------------ */
 
 .dockerShell {
-    padding: 10px 10px 15px;
-    margin: 0;
-    box-sizing: border-box;
-    border: 2px solid #6c8ea3;
-    border-radius: 12px;
-    background: #ffffff none;
-    color: #6c8ea3;
-    text-align: left;
+  padding: 10px 10px 15px;
+  margin: 0;
+  box-sizing: border-box;
+  border: 2px solid #6c8ea3;
+  border-radius: 12px;
+  background: #ffffff none;
+  color: #6c8ea3;
+  text-align: left;
 }
 
 .dockerShell-label {
-    display: inline-block;
-    padding: 5px;
-    margin: 0;
-    border-radius: 0 0 3px 3px;
-    font-size: 1.2rem;
-    font-weight: bold;
+  display: inline-block;
+  padding: 5px;
+  margin: 0;
+  border-radius: 0 0 3px 3px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .dockerShell > * + * {
-    margin-top: 8px;
+  margin-top: 8px;
 }

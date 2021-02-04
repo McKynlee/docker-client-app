@@ -1,7 +1,7 @@
 const mapStoreToProps = (store) => {
-    return {
-        store,
-    }
+  return {
+    store,
+  };
 };
 
 export default mapStoreToProps;
