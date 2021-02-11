@@ -18,11 +18,11 @@ Docker containers whether [Windows](https://www.docker.com/products/windows-cont
 We're gonna start by looking at how we setup a single **Docker Container**. This single **Container** will be used to launch and run a React application built using `create-react-app` as the base setup.
 
 
-### Dockerfile, Docker with Single Container
+### Dockerfile Explained
 
 1. In order to setup a single docker container for your development environment you need to create a file named `Dockerfile` in the root of your project directory.
 
-1. In order to set the base environment we use an existing image from the [Docker Hub](https://hub.docker.com) using the `FROM` setting in the `Dockerfile`.
+1. In order to set the base environment we use an existing image from the [Docker Hub](https://hub.docker.com) using the `FROM` setting in the `Dockerfile`. In this case we are setting up a node environment to run `react-scripts` from `create-react-app` and install dependencies.
 
     ```
     # Base image we are modifying from https://hub.docker.com/
@@ -32,7 +32,7 @@ We're gonna start by looking at how we setup a single **Docker Container**. This
 1. Make a new directory and set it as the working directory for the Docker image.
 
     ```
-    # set working directory
+    # Set working directory
     RUN mkdir -p /app
     WORKDIR /app
     ```
@@ -40,22 +40,23 @@ We're gonna start by looking at how we setup a single **Docker Container**. This
 1. Copy over the existing `package.json` to the new working directory and install the application dependencies using `npm install`.
 
     ```
-    # install and cache app dependencies
-    COPY package.json /app/package.json
+    # Install and cache app dependencies
+    COPY ./package.json ./
     RUN npm install
     ```
 
 1. After dependency installation copy over all assets to the working directory.
 
     ```
-    COPY . /app
+    COPY . ./
     ```
 
-1. Ensure that the default `create-react-app` port is exposed to the network created by Docker.
+1. Ensure that the default `create-react-app` port is exposed to the network created by Docker. Port 3000 is the port that `react-scripts` defaults to in order to run the react application and the 35729 port is the port used for warm reloading in `react-scripts`.
 
     ```
     # Exposing a specific PORT for viewing the application
     EXPOSE 3000
+    EXPOSE 35729
     ```
 
 1. Define the final command(s) that need to be run to kick off the application when the container launches.
