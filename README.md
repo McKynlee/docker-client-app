@@ -70,84 +70,108 @@ We're gonna start by looking at how we setup a single **Docker Container**. This
 
 That's great we have a configuration for **Docker** but how do we actually use it. Because we downloaded the **Docker** desktop application we now have access to the command line tools which we'll be leveraging to build our **Docker Image** and then run the **Docker Container**.
 
-**Build and Tag the Docker Image:**
+##### Step 1. Build and Tag the Docker Image
 
-`docker build -t dkrapp:dev .`
-> NOTE: `docker build -t [CONTAINER_NAME]:[CONTAINER_TAG] .`
+```zsh
+$ docker build -t dkr-world:dev .
+```
+
+> NOTE: `-t [NAME]:[TAG]`
 
 1. `docker build` - is the command used to build our application's Docker image
-1. `--tag=[CONTAINER_NAME]` - the tag flag assigns a tag or name to the built docker image so it can be used to run the docker container based on the image
+1. `-t [NAME]:[TAG]` - the tag flag assigns a tag or name to the built docker image so it can be used to run the docker container based on the image
     - `[CONTAINER_NAME]` - is a placeholder and can be whatever you want to use in order to identify the Docker image
 1. ` .` - is a required argument showing the location of the Dockerfile to be used for the Docker configuration
 
-**Running the Docker Container:**
 
-`docker run -p 3001:3000 [CONTAINER_NAME]`
+##### Step 2. Verify the Image was Created
 
-1. The [docker run command](https://docs.docker.com/engine/reference/commandline/run/) creates a new container instance, from the image we just created, and runs it.
-1. `-p 3001:3000` exposes port 3000 to other Docker containers on the same network (for inter-container communication) and port 3001 to the host.
-1. Additionally the `-d` option can be used in order to run the container in detach mode.
+```zsh
+$ docker image ls
+```
 
-**Warm Reloading with `create-react-app`:**
+expected output:
+```
+REPOSITORY      TAG      IMAGE ID       CREATED         SIZE
+dkr-app         dev      6d946e5851b5   3 minutes ago   379MB
+```
 
-Our application was built using `create-react-app` which does support web page reloading.
 
-To make this work, we need to do two things:
-1. Mount the current working directory into the Docker container
-    - `-v $(pwd):/app`, will be added to our `docker run` command
-2. Expose the WebSocket port
-    - The WebSocket thing is set up by exposing port 35729 to the host (`-p 35729:35729`).
-    - Add `EXPOSE 35729` to our `Dockerfile` just below the other exposed port.
-    - `-p 35729:35729`, will then also be added to our `docker run` command
+##### Step 3. Running the Docker Container
 
-When we run our container the command should now be:
+```zsh
+$ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true dkr-app:dev
+```
 
-`docker run -p 3001:3000 -p 35729:35729 -v $(pwd):/app [CONTAINER_NAME]`
+or (they're the same)
+
+```zsh
+$ docker run -it --rm \
+-v ${PWD}:/app \
+-v /app/node_modules \
+-p 3001:3000 \
+-e CHOKIDAR_USEPOLLING=true \
+dkr-app:dev
+```
+
+- `docker run` - The [docker run command](https://docs.docker.com/engine/reference/commandline/run/) creates a new container instance, from the image we just created, and runs it.
+- `-it` - Starts the container in interactive mode.
+- `--rm` - Removes the container and volumes after the container exits.
+- `-v ${PWD}:/app` - Configure volume to mount the code into the container at "/app".
+- `-v /app/node_modules` - Since we want to use the container version of the "node_modules" folder, we configured another volume: `/app/node_modules`.
+- `-p 3001:3000` - Exposes port 3000 inside the container to other containers and port 3001 to our host machine.
+- `-e CHOKIDAR_USEPOLLING=true` - Enables a polling mechanism via chokidar (which wraps fs.watch, fs.watchFile, and fsevents) so that hot-reloading will work.
 
 
 #### Docker Command Cheat Sheet
 
-```
-## List Docker CLI commands
-docker
-docker container --help
-
-## Display Docker version and info
-docker --version
-docker version
-docker info
-
-## Execute Docker image
-docker run hello-world
-
-## List Docker images
-docker image ls
-
-## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
-
-## Remove image by ID
-docker image rm [ID]
-## Remove all stopped images
-docker image prune
-
-## Remove all stopped containers:
-## pass the `--volumes` tag if you want all volumes to be removed as well
-docker system prune
-
-## Remove container by ID:
-docker container rm [ID]
-
+**List Docker CLI commands:**
+```zsh
+$ docker
+$ docker container --help
 ```
 
-## Dependencies
+**Display Docker version and info:**
+```zsh
+$ docker --version
+$ docker version
+$ docker info
+```
 
-- [Create React App](https://github.com/facebook/create-react-app)
-- react
-- redux
-- redux saga
-- node.js
-- express
-- postgresql
+**Execute Docker image:**
+```zsh
+$ docker run hello-world
+```
+
+**List Docker images:**
+```zsh
+$ docker image ls
+```
+
+**List Docker containers (running, all, all in quiet mode):**
+```zsh
+$ docker container ls
+$ docker container ls --all
+$ docker container ls -aq
+```
+
+**Remove image by ID:**
+```zsh
+$ docker image rm [ID]
+```
+
+**Remove all stopped images:**
+```zsh
+$ docker image prune
+```
+
+**Remove all stopped containers:**
+*pass the `--volumes` tag if you want all volumes to be removed as well*
+```zsh
+$ docker system prune
+```
+
+**Remove container by ID:**
+```zsh
+$ docker container rm [ID]
+```
