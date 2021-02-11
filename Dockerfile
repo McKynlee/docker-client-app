@@ -6,8 +6,9 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # install and cache app dependencies
-COPY . /app
+COPY ./package.json ./
 RUN npm install
+COPY . ./
 
 # Exposing a specific PORT for viewing the application
 EXPOSE 3000

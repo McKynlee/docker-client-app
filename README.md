@@ -13,16 +13,6 @@ Docker containers whether [Windows](https://www.docker.com/products/windows-cont
 
 [Try Docker containers](https://www.docker.com/get-started) with free, hosted lab tutorials or download and take a tutorial to start building apps.
 
-
-## Lesson Stages
-
-- Single Docker Container
-- Adding Docker Compose
-- Running Multiple Containers
-- Server Container
-- Database Container
-
-
 ## Single Docker Container
 
 We're gonna start by looking at how we setup a single **Docker Container**. This single **Container** will be used to launch and run a React application built using `create-react-app` as the base setup.
@@ -36,7 +26,7 @@ We're gonna start by looking at how we setup a single **Docker Container**. This
 
     ```
     # Base image we are modifying from https://hub.docker.com/
-    FROM node:current-alpine
+    FROM node:14.15.4-alpine3.10
     ```
 
 1. Make a new directory and set it as the working directory for the Docker image.
@@ -82,7 +72,8 @@ That's great we have a configuration for **Docker** but how do we actually use i
 
 **Build and Tag the Docker Image:**
 
-`docker build --tag=[CONTAINER_NAME] .`
+`docker build -t dkrapp:dev .`
+> NOTE: `docker build -t [CONTAINER_NAME]:[CONTAINER_TAG] .`
 
 1. `docker build` - is the command used to build our application's Docker image
 1. `--tag=[CONTAINER_NAME]` - the tag flag assigns a tag or name to the built docker image so it can be used to run the docker container based on the image
@@ -99,7 +90,7 @@ That's great we have a configuration for **Docker** but how do we actually use i
 
 **Warm Reloading with `create-react-app`:**
 
-Our application was built using `create-react-app` which does support web page reloading. 
+Our application was built using `create-react-app` which does support web page reloading.
 
 To make this work, we need to do two things:
 1. Mount the current working directory into the Docker container
