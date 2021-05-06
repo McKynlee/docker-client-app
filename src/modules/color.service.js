@@ -52,13 +52,13 @@ class Color {
     let b = 0;
 
     // 3 digits
-    if (hexStr.length == 4) {
+    if (hexStr.length === 4) {
       r = '0x' + hexStr[1] + hexStr[1];
       g = '0x' + hexStr[2] + hexStr[2];
       b = '0x' + hexStr[3] + hexStr[3];
 
       // 6 digits
-    } else if (hexStr.length == 7) {
+    } else if (hexStr.length === 7) {
       r = '0x' + hexStr[1] + hexStr[2];
       g = '0x' + hexStr[3] + hexStr[4];
       b = '0x' + hexStr[5] + hexStr[6];
@@ -73,11 +73,11 @@ class Color {
     let g = 0;
     let b = 0;
 
-    if (hexStr.length == 4) {
+    if (hexStr.length === 4) {
       r = '0x' + hexStr[1] + hexStr[1];
       g = '0x' + hexStr[2] + hexStr[2];
       b = '0x' + hexStr[3] + hexStr[3];
-    } else if (hexStr.length == 7) {
+    } else if (hexStr.length === 7) {
       r = '0x' + hexStr[1] + hexStr[2];
       g = '0x' + hexStr[3] + hexStr[4];
       b = '0x' + hexStr[5] + hexStr[6];
@@ -95,11 +95,11 @@ class Color {
     let s = 0;
     let l = 0;
 
-    if (delta == 0) {
+    if (delta === 0) {
       h = 0;
-    } else if (cmax == r) {
+    } else if (cmax === r) {
       h = ((g - b) / delta) % 6;
-    } else if (cmax == g) {
+    } else if (cmax === g) {
       h = (b - r) / delta + 2;
     } else {
       h = (r - g) / delta + 4;
@@ -110,7 +110,7 @@ class Color {
     if (h < 0) h += 360;
 
     l = (cmax + cmin) / 2;
-    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
     s = +(s * 100).toFixed(1);
     l = +(l * 100).toFixed(1);
 
@@ -122,7 +122,7 @@ class Color {
   // --------------------------------------------------------------------------------
 
   convertTo(convertCode) {
-    if (COLOR_CODES[convertCode] == null) {
+    if (COLOR_CODES[convertCode] === null) {
       return false;
     }
 
