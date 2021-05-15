@@ -44,7 +44,7 @@ class Header extends Component {
             <svg className="logo-img" viewBox="0 0 720 600">
               <use xlinkHref="/images/docker-logo.svg#dockerLogo"></use>
             </svg>
-            <h1 className="logo-text">Docker at Work</h1>
+            <h1 className="logo-text">McKDocker at Work</h1>
           </div>
         </div>
         <div className="appTopper-actions">
